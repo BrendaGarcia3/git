@@ -205,10 +205,11 @@ MAKEFLAGS="$MAKEFLAGS --jobs=10"
 GIT_PROVE_OPTS="--timer --jobs 10 --state=failed,slow,save"
 
 GIT_TEST_OPTS="$GIT_TEST_OPTS --verbose-log -x"
-if test windows = "$CI_OS_NAME"
-then
+case "$CI_OS_NAME" in
+windows | windows_nt)
 	GIT_TEST_OPTS="$GIT_TEST_OPTS --no-chain-lint --no-bin-wrappers"
-fi
+	;;
+esac
 
 export GIT_TEST_OPTS
 export GIT_PROVE_OPTS
